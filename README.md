@@ -262,7 +262,7 @@ Die Easter Eggs dürfen den Hauptablauf nicht unterbrechen.
 
 7. UX und Animationen
 
-Die Webseite muss auf Smartphones außergewöhnlich gut aussehen, insbesondere auf Android und iPhone.
+Die Webseite muss auf Smartphones außergewöhnlich gut aussehen, insbesondere auf iPhone.
 
 Anforderungen:
 
