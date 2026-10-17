@@ -44,7 +44,7 @@ export const story = {
     { id: 'no', label: 'I don’t feel the same way', icon: '🤍', response: 'Thank you for being honest. I’m glad I got to tell you how I feel.', message: 'I don’t feel the same way 🤍' },
   ],
   easterEggs: {
-    bookmark: 'One little reminder: you don’t have to impress me. I like you just as you are.',
+    bookmark: 'The best part of your book is the way you are',
     python: 'No bugs here. Just me, smiling at my phone when you send a meme. :)',
   },
 }

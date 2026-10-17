@@ -22,9 +22,9 @@ test('complete story, discoveries, pseudocode and all three honest answers', asy
   page.on('response', response=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`)})
   await openBook(page)
   await page.getByRole('button',{name:'Tap for a little note',exact:true}).click()
-  await expect(page.getByText('One little reminder:',{exact:false})).toBeVisible()
+  await expect(page.getByText('The best part of your book is the way you are',{exact:true})).toBeVisible()
   await page.getByRole('button',{name:'Close note',exact:true}).click()
-  await expect(page.getByText('One little reminder:',{exact:false})).toHaveCount(0)
+  await expect(page.getByText('The best part of your book is the way you are',{exact:true})).toHaveCount(0)
   await page.getByRole('button',{name:'Turn the Page'}).click()
   await expect(page.getByRole('heading',{name:'Between Books & Flowers',exact:true})).toBeVisible()
   await expect(page.getByText('Tap each card to find a little message.')).toBeVisible()
@@ -47,7 +47,7 @@ test('complete story, discoveries, pseudocode and all three honest answers', asy
   await page.getByRole('button',{name:'Turn the Page'}).click()
   await expect(page.getByRole('heading',{name:'The Unwritten Chapter',exact:true})).toBeVisible()
   await page.getByRole('button',{name:'Tap for a little note',exact:true}).click()
-  await expect(page.getByText('One little reminder:',{exact:false})).toBeVisible()
+  await expect(page.getByText('The best part of your book is the way you are',{exact:true})).toBeVisible()
   await page.getByRole('button',{name:'Turn the Page'}).click()
   for(const [label,response] of [
     ['I’d love to see where this goes','Then let’s take it one page at a time. I’d really like that.'],
