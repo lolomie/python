@@ -45,10 +45,10 @@ export function ChapterContent({ chapter }: { chapter: number }) {
   if (chapter === 2) return <>
     <div className="code-card">
       <div className="code-header"><span className="window-dots" aria-hidden="true">● ● ●</span><span>a_little_feeling.py</span><Heart size={13}/></div>
-      <p className="code-label">JUST A PYTHON JOKE · NOT REAL CODE</p>
-      <pre><code><span className="syntax">try</span>:{'\n'}{'    '}stop_thinking_about_you(){'\n'}<span className="syntax">except</span> ImpossibleError:{'\n'}{'    '}print(<span className="string">"Well... here we are ❤️"</span>)</code></pre>
+      <p className="code-label">JUST A PYTHON JOKE</p>
+      <pre><code><span className="syntax">try</span>:{'\n'}{'    '}stop_thinking_about_you(){'\n'}<span className="syntax">except</span> ImpossibleError:{'\n'}{'    '}print(<span className="string">"Well... here we are"</span>)</code></pre>
       <button className="run-button" onClick={()=>setRan(true)}><Play size={14} fill="currentColor"/> {ran ? 'Run again' : 'Run Code'}</button>
-      {ran && <div className="code-output" role="status"><span>↳ Output</span><p>Looks like you’ve become my favorite exception.</p><p className="code-explanation">In other words: I keep thinking about you. :)</p></div>}
+      {ran && <div className="code-output" role="status"><span>↳ Output</span><p>Looks like you’ve become my favorite thought.</p><p className="code-explanation">In other words: I keep thinking about you :)</p></div>}
     </div>
     <button className="python-egg" aria-expanded={egg} aria-controls="python-surprise" onClick={()=>setEgg(!egg)}><Sparkles size={15} aria-hidden="true"/><span>{egg ? 'Close the surprise' : 'Tap for a little surprise'}</span><ChevronDown size={13} aria-hidden="true"/></button>
     {egg && <p id="python-surprise" className="small-reveal">{story.easterEggs.python}</p>}
