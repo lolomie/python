@@ -1,6 +1,6 @@
 export const story = {
   recipientName: '',
-  senderName: '',
+  senderName: 'Ram',
   // Public contact information, never a secret. International digits, e.g. 491701234567.
   whatsappNumber: '',
   title: 'A Story Yet to Be Written',
