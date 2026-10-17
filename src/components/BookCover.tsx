@@ -11,7 +11,7 @@ export function BookCover({ onOpen }: { onOpen: () => void }) {
       <span className="cover-ribbon" aria-hidden="true"/>
       <div className="cover-stars" aria-hidden="true">✧ <span>✦</span> ✧</div>
       <p className="cover-volume">AN UNFINISHED LITTLE STORY</p>
-      <h1>A Story<br/><em>Yet to Be</em><br/>Written</h1>
+      <h1>A Story<br/><em>Will Be</em><br/>Written</h1>
       <div className="cover-rule" aria-hidden="true">❦</div>
       <p className="dedication">{story.recipientName ? `Made for ${story.recipientName}, someone very special.` : story.dedication}</p>
       <Botanical className="cover-flower" variant="bouquet"/>
