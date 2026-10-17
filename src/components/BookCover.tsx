@@ -13,11 +13,11 @@ export function BookCover({ onOpen }: { onOpen: () => void }) {
       <p className="cover-volume">AN UNFINISHED LITTLE STORY</p>
       <h1>A Story<br/><em>Yet to Be</em><br/>Written</h1>
       <div className="cover-rule" aria-hidden="true">❦</div>
-      <p className="dedication">{story.recipientName ? `Made for ${story.recipientName}, someone a little extraordinary.` : story.dedication}</p>
+      <p className="dedication">{story.recipientName ? `Made for ${story.recipientName}, someone very special.` : story.dedication}</p>
       <Botanical className="cover-flower" variant="bouquet"/>
       <p className={`cover-edition${story.senderName ? ' cover-author' : ''}`}>{story.senderName ? `by ${story.senderName} :)` : 'A FIRST EDITION OF SOMETHING POSSIBLE'}</p>
     </div>
     <button className="primary open-button" onClick={onOpen}>Open the Book <ArrowRight size={17}/></button>
-    <p className="quiet-note"><Sparkles size={13}/> A few pages. A little courage. No rush.</p>
+    <p className="quiet-note"><Sparkles size={13}/> A few little pages, just for you. Take your time.</p>
   </motion.section>
 }

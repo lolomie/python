@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/react'
-import { ArrowLeft, ArrowRight, BookOpen, Bookmark, Heart } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BookOpen, Bookmark, ChevronDown, Heart } from 'lucide-react'
 import { story } from './config/story'
 import { BookCover } from './components/BookCover'
 import { Botanical } from './assets/Botanical'
@@ -23,15 +23,15 @@ function Story() {
     <a className="skip-link" href="#story">Skip to the story</a>
     <header className="site-header">
       <a href="#" className="wordmark" aria-label="Return to book cover" onClick={e=>{e.preventDefault();setPage(-1)}}><BookOpen size={20} strokeWidth={1.3}/><span>a little story</span></a>
-      <span className="header-note">FOR YOU, WITH A LITTLE COURAGE <Heart size={12}/></span>
+      <span className="header-note">A LITTLE SOMETHING FOR YOU <Heart size={12}/></span>
     </header>
     <main id="story">
       <div className="intro-line"><span className="tiny-star">✦</span><span>{story.subtitle}</span><span className="tiny-star">✦</span></div>
       <Botanical className="ambient-flower ambient-left"/><Botanical className="ambient-flower ambient-right"/>
       <AnimatePresence mode="wait" initial={false}>
         {page === -1 ? <BookCover key="cover" onOpen={()=>setPage(0)}/> : <motion.section key={page} className={`open-book chapter-${page+1}`} initial={{ opacity:0, y:reducedMotion?0:12 }} animate={{opacity:1,y:0}} exit={{opacity:0,y:reducedMotion?0:-6}} transition={{duration:reducedMotion?0:.23}} onAnimationComplete={()=>heading.current?.focus({preventScroll:true})} aria-label={`Chapter ${page+1} of 5`}>
-          <div className="page-topline"><span>CHAPTER {['ONE','TWO','THREE','FOUR','FIVE'][page]}</span><button className="bookmark-button" onClick={()=>setBookmarkOpen(!bookmarkOpen)} aria-label="Read the bookmark note" aria-expanded={bookmarkOpen}><Bookmark size={18}/></button></div>
-          {bookmarkOpen&&<aside className="bookmark-message">{story.easterEggs.bookmark}</aside>}
+          <div className="page-topline"><span>CHAPTER {['ONE','TWO','THREE','FOUR','FIVE'][page]}</span><button className="bookmark-button" onClick={()=>setBookmarkOpen(!bookmarkOpen)} aria-expanded={bookmarkOpen} aria-controls="bookmark-note"><Bookmark size={17} aria-hidden="true"/><span>{bookmarkOpen ? 'Close note' : 'Tap for a little note'}</span><ChevronDown size={13} aria-hidden="true"/></button></div>
+          {bookmarkOpen&&<aside id="bookmark-note" className="bookmark-message">{story.easterEggs.bookmark}</aside>}
           <div className="chapter-copy">
             <p className="eyebrow">{chapter.label}</p>
             <h1 ref={heading} tabIndex={-1}>{chapter.title}</h1>
@@ -48,7 +48,7 @@ function Story() {
       </AnimatePresence>
       {page>=0&&<div className="chapter-dots" aria-label={`Chapter ${page+1} of 5`}>{story.chapters.map((c,i)=><button key={c.title} aria-label={`Go to chapter ${i+1}: ${c.title}`} aria-current={i===page?'step':undefined} className={i===page?'active':''} onClick={()=>setPage(i)}/>)}</div>}
     </main>
-    <footer className="site-footer"><span>Written with care{story.senderName ? `, by ${story.senderName}` : ''}.</span><span className="footer-heart" aria-hidden="true">♡</span><span>No rush. Just a possibility.</span></footer>
+    <footer className="site-footer"><span>Written with care{story.senderName ? `, by ${story.senderName}` : ''}.</span><span className="footer-heart" aria-hidden="true">♡</span><span>No rush. Let’s see where this goes.</span></footer>
   </div>
 }
 

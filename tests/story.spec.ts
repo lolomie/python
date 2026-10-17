@@ -21,26 +21,37 @@ test('complete story, discoveries, pseudocode and all three honest answers', asy
   page.on('pageerror', error=>errors.push(error.message))
   page.on('response', response=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`)})
   await openBook(page)
+  await page.getByRole('button',{name:'Tap for a little note',exact:true}).click()
+  await expect(page.getByText('One little reminder:',{exact:false})).toBeVisible()
+  await page.getByRole('button',{name:'Close note',exact:true}).click()
+  await expect(page.getByText('One little reminder:',{exact:false})).toHaveCount(0)
   await page.getByRole('button',{name:'Turn the Page'}).click()
   await expect(page.getByRole('heading',{name:'Between Books & Flowers',exact:true})).toBeVisible()
-  for(const name of ['A well-loved book','A little wildflower','A pocket-sized star']){
+  await expect(page.getByText('Tap each card to find a little message.')).toBeVisible()
+  await expect(page.getByText('Tap to open',{exact:true})).toHaveCount(3)
+  for(const name of ['A favorite book','A little flower','A little star']){
     await page.getByRole('button',{name,exact:true}).click()
     await expect(page.getByRole('button',{name,exact:true})).toHaveAttribute('aria-expanded','true')
   }
-  await expect(page.getByText('Plot twist:',{exact:false})).toBeVisible()
+  await expect(page.getByText('Our Python memes always make me smile.',{exact:false})).toBeVisible()
+  await page.getByRole('button',{name:'A little star',exact:true}).click()
+  await expect(page.getByText('Our Python memes always make me smile.',{exact:false})).toHaveCount(0)
   await page.getByRole('button',{name:'Turn the Page'}).click()
   await page.getByRole('button',{name:'Run Code'}).click()
   await expect(page.getByText('Looks like you’ve become my favorite exception.')).toBeVisible()
-  await page.getByRole('button',{name:'# a tiny developer’s note'}).click()
-  await expect(page.getByText('No bugs were harmed.',{exact:false})).toBeVisible()
+  await expect(page.getByText('In other words: I keep thinking about you. :)')).toBeVisible()
+  await page.getByRole('button',{name:'Tap for a little surprise',exact:true}).click()
+  await expect(page.getByText('No bugs here.',{exact:false})).toBeVisible()
+  await page.getByRole('button',{name:'Close the surprise',exact:true}).click()
+  await expect(page.getByText('No bugs here.',{exact:false})).toHaveCount(0)
   await page.getByRole('button',{name:'Turn the Page'}).click()
   await expect(page.getByRole('heading',{name:'The Unwritten Chapter',exact:true})).toBeVisible()
-  await page.getByRole('button',{name:'Read the bookmark note'}).click()
-  await expect(page.getByText('For the record:',{exact:false})).toBeVisible()
+  await page.getByRole('button',{name:'Tap for a little note',exact:true}).click()
+  await expect(page.getByText('One little reminder:',{exact:false})).toBeVisible()
   await page.getByRole('button',{name:'Turn the Page'}).click()
   for(const [label,response] of [
-    ['I’d love to see where this goes','Then maybe this is the beginning of a beautiful chapter.'],
-    ['I need a little more time','Take all the time you need. Your answer matters more than the timing.'],
+    ['I’d love to see where this goes','Then let’s take it one page at a time. I’d really like that.'],
+    ['I need a little more time','Take all the time you need. There’s no hurry to answer.'],
     ['I don’t feel the same way','Thank you for being honest. I’m glad I got to tell you how I feel.'],
   ]){
     await page.getByRole('button',{name:label,exact:true}).click()

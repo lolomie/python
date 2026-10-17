@@ -9,3 +9,18 @@
 @media(max-width:370px){.header-note{display:none}.closed-book{width:263px;height:370px}.cover-volume{letter-spacing:1.5px}.cover-eyebrow{letter-spacing:1.1px;font-size:7px}.intro-line{font-size:13px}.open-book{padding-left:20px;padding-right:20px}.chapter-copy h1{font-size:27px}.code-card pre{font-size:9px}.answer-button{font-size:10px}.site-footer{gap:7px;font-size:7px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:0s!important;animation-delay:0s!important;transition-duration:0s!important;scroll-behavior:auto!important}.draw-line{stroke-dashoffset:0}.closed-book:hover{transform:rotate(-3deg)}}
 .cover-author{font-family:Georgia,serif;font-size:12px;letter-spacing:.7px;color:#fff9f1;background:#53614b;width:max-content;margin-inline:auto;padding:2px 8px;border-radius:3px}
+.page-topline{gap:10px}
+.bookmark-button{clip-path:none;width:auto;height:auto;min-height:44px;margin:0;gap:6px;padding:8px 10px;border:1px solid #dec0c6;border-radius:5px;background:#f8e9ed;color:#704751;font-size:10px;letter-spacing:0;line-height:1.5}
+.bookmark-button:hover{background:#f0d9e0}
+.bookmark-button>span{white-space:nowrap}
+.bookmark-button>svg:last-child,.python-egg>svg:last-child,.discovery-action svg{transition:transform .2s}
+.bookmark-button[aria-expanded=true]>svg:last-child,.python-egg[aria-expanded=true]>svg:last-child,.discovered .discovery-action svg{transform:rotate(180deg)}
+.interaction-hint{font-size:12px;line-height:1.6;color:#66594c}
+.discovery{gap:8px;padding:14px 5px 12px}
+.discovery>span{font-size:10px;line-height:1.5}
+.discovery .discovery-action{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:10px;color:#665744;text-decoration:underline;text-underline-offset:3px}
+.discovery .discovery-action svg{color:inherit}
+.python-egg{font-family:Arial,Helvetica,sans-serif;font-size:12px;gap:8px;min-height:46px;margin:17px auto 0;padding:10px 14px;border:1px dashed #91a084;background:#edf0e5;color:#405039;border-radius:5px}
+.python-egg:hover{background:#e0e7d7}
+.code-output .code-explanation{font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.7;margin-top:8px}
+@media(prefers-reduced-motion:reduce){.bookmark-button>svg:last-child,.python-egg>svg:last-child,.discovery-action svg{transition:none}}
