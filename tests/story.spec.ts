@@ -2,6 +2,9 @@ import { test, expect, type Page } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import { whatsappLink } from '../src/config/story'
 import { story } from '../src/config/story'
+import { createServer } from 'node:http'
+import { readFile } from 'node:fs/promises'
+import { resolve, extname } from 'node:path'
 
 async function openBook(page: Page) {
   await page.goto('/')
@@ -100,4 +103,41 @@ test('WhatsApp contact normalization and invalid contact guard',()=>{
   expect(whatsappLink('+49 (170) 123-4567','A little yes 💗')).toBe('https://wa.me/491701234567?text=A%20little%20yes%20%F0%9F%92%97')
   expect(whatsappLink('', 'hello')).toBeNull()
   expect(whatsappLink('javascript:alert(1)','hello')).toBeNull()
+})
+
+test('production assets and the story work under the GitHub Pages subpath',async({page})=>{
+  const root=resolve('dist')
+  const server=createServer(async(req,res)=>{
+    const path=new URL(req.url??'/', 'http://localhost').pathname
+    if(!path.startsWith('/python/')){res.writeHead(404).end();return}
+    const file=resolve(root,path.slice('/python/'.length)||'index.html')
+    if(!file.startsWith(root+'/')){res.writeHead(403).end();return}
+    try{
+      const contents=await readFile(file)
+      const mime:Record<string,string>={'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml'}
+      res.writeHead(200,{'Content-Type':mime[extname(file)]??'application/octet-stream'}).end(contents)
+    }catch{res.writeHead(404).end()}
+  })
+  await new Promise<void>(done=>server.listen(0,'127.0.0.1',done))
+  const address=server.address()
+  if(!address||typeof address==='string')throw new Error('Missing server address')
+  const errors:string[]=[]
+  page.on('response',r=>{if(r.status()>=400)errors.push(r.url())})
+  try{
+    await page.goto(`http://127.0.0.1:${address.port}/python/`)
+    await page.getByRole('button',{name:'Open the Book'}).click()
+    await expect(page.getByRole('heading',{name:'The Beginning',exact:true})).toBeVisible()
+    expect(errors).toEqual([])
+  }finally{await new Promise<void>((done,reject)=>server.close(error=>error?reject(error):done()))}
+})
+
+test('small phone layout keeps every answer reachable',async({page})=>{
+  await page.setViewportSize({width:320,height:568})
+  await openBook(page)
+  await chapter(page,5,'Your Turn')
+  for(const a of story.answers){
+    await page.getByRole('button',{name:a.label,exact:true}).click()
+    await expect(page.getByText(a.response,{exact:true})).toBeVisible()
+  }
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true)
 })
