@@ -49,6 +49,9 @@ test('complete story, discoveries, pseudocode and all three honest answers', asy
   await page.getByRole('button',{name:'Tap for a little note',exact:true}).click()
   await expect(page.getByText('The best part of your book is the way you are',{exact:true})).toBeVisible()
   await page.getByRole('button',{name:'Turn the Page'}).click()
+  await expect(page.getByRole('img',{name:'A pink Porsche 911, with Ram driving and Maria in the passenger seat'})).toBeVisible()
+  await expect(page.getByText('Maybe a little drive together, one day?',{exact:true})).toBeVisible()
+  await expect(page.getByText('Just a little daydream. Only if you’d like to.',{exact:true})).toBeVisible()
   for(const [label,response] of [
     ['I’d love to see where this goes','Then let’s take it one page at a time. I’d really like that.'],
     ['I need a little more time','Take all the time you need. There’s no hurry to answer.'],

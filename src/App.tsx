@@ -3,6 +3,7 @@ import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/
 import { ArrowLeft, ArrowRight, BookOpen, Bookmark, ChevronDown, Heart } from 'lucide-react'
 import { story } from './config/story'
 import { BookCover } from './components/BookCover'
+import { RoadTrip } from './components/RoadTrip'
 import { Botanical } from './assets/Botanical'
 import { ChapterContent } from './chapters/ChapterContent'
 
@@ -36,6 +37,7 @@ function Story() {
             <p className="eyebrow">{chapter.label}</p>
             <h1 ref={heading} tabIndex={-1}>{chapter.title}</h1>
             <span className="chapter-ornament" aria-hidden="true">✧</span>
+            {page === 4 && <RoadTrip/>}
             {chapter.paragraphs.map((p,i)=><p className={`story-paragraph paragraph-${i}`} key={p}>{p}</p>)}
           </div>
           <ChapterContent key={page} chapter={page}/>

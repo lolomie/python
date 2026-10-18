@@ -34,6 +34,8 @@ This repository is the dedicated site repository: https://github.com/lolomie/pyt
 
 The original project brief is preserved in [`docs/BRIEF.md`](docs/BRIEF.md).
 
+The last chapter includes an original SVG illustration of a pink Porsche 911, seen from behind. The arrows label the left driver’s seat “Ram” and the right passenger seat “Maria”. These names and the optional daydream caption are configurable in `story.roadTrip` in `src/config/story.ts`. All three answer choices remain available below the illustration.
+
 1. Push the project to `main`.
 2. In **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
 3. Run or wait for **Verify and deploy storybook** in Actions.

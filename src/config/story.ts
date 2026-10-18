@@ -47,6 +47,12 @@ export const story = {
     bookmark: 'The best part of your book is the way you are',
     python: 'No bugs here. Just me, smiling at my phone when you send a meme. :)',
   },
+  roadTrip: {
+    driverName: 'Ram',
+    passengerName: 'Maria',
+    caption: 'Maybe a little drive together, one day?',
+    note: 'Just a little daydream. Only if you’d like to.',
+  },
 }
 
 export function whatsappLink(number: string, message: string) {
